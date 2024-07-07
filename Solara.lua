@@ -46,21 +46,27 @@ function UpdateHighlights()
 			local Highlight = v.Character:FindFirstChild("ESP_Highlight")
 			if v.Name == Sheriff and IsAlive(v) then
 				Highlight.FillColor = Color3.fromRGB(0, 0, 225)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			elseif v.Name == Murder and IsAlive(v) then
 				Highlight.FillColor = Color3.fromRGB(225, 0, 0)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			elseif v.Name == Hero and IsAlive(v) and v.Backpack:FindFirstChild("Gun") then
 				Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			elseif v.Name == Hero and IsAlive(v) and v.Character:FindFirstChild("Gun") then
 				Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			elseif not IsAlive(v) then
 				Highlight.FillColor = Color3.fromRGB(100, 100, 100)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 1
 			else
 				Highlight.FillColor = Color3.fromRGB(0, 225, 0)
+				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			end
 		end
@@ -221,10 +227,12 @@ workspace.DescendantAdded:Connect(function(GunESP)
         	Text = "Gun Dropped",
            Duration = 3
         })
-        local espgunhigh = Instance.new("Highlight", GunESP)
+        local espgunhigh = Instance.new("Highlight")
         espgunhigh.Name = "EspGun"
+	espgunhigh.Adornee = GunESP
         espgunhigh.FillColor = Color3.fromRGB(255, 255, 0)
         espgunhigh.FillTransparency = 0.5
+	espgunhigh.OutlineTransparency = 1
     end
 end)
 
