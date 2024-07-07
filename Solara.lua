@@ -163,7 +163,14 @@ function getPredictedPosition(player, shootOffset)
 end
  
 function shootMurder()
-    if findSheriff() ~= game:GetService("Players").LocalPlayer then return end
+    if findSheriff() ~= game:GetService("Players").LocalPlayer then 
+	game:GetService("StarterGui"):SetCore("SendNotification",{
+        	Title = "Error!",
+        	Text = "No Gun",
+           	Duration = 3
+        })
+	return 
+    end
 
     local murderer = findMurderer()
     if not murderer then return end
