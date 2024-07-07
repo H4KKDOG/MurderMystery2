@@ -221,7 +221,7 @@ task.spawn(function()
 end)
  
 workspace.DescendantAdded:Connect(function(GunESP)
-	if GunESP.Name == "GunDrop" and not GunESP:FindFirstChild("EspGun") then
+	if GunESP.Name == "GunDrop" then
         game:GetService("StarterGui"):SetCore("SendNotification",{
         	Title = "@stupidzero.",
         	Text = "Gun Dropped",
