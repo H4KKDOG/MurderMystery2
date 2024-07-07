@@ -1,6 +1,6 @@
 repeat task.wait() until game:IsLoaded()
 
-if game.PladeId ~= 142823291 then
+if game.PlaceId ~= 142823291 then
   return
 end
 
