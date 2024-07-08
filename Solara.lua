@@ -196,13 +196,16 @@ function shootMurder()
 end
 
 function GunHighlight()
-    for i, v in pairs(wworkspace:GetDescendants()) do
+    local children = workspace:GetChildren()
+        
+    for i = 1, #children do
+        local v = children[i]
         if v.Name == "GunDrop" then 
             local espgun = Instance.new("Highlight", v)
-            espgun.Name = "ESP_Highlight"
+            espgun.Name = "GunHighlight"
             espgun.FillColor = Color3.fromRGB(255, 255, 0)
             espgun.OutlineTransparency = 1
-            espgun.FillTransparency = 0.5   
+            espgun.FillTransparency = 0.5
         end
     end
 end
@@ -232,6 +235,16 @@ workspace.DescendantAdded:Connect(function(GunESP)
            Duration = 3
         })
         GunHighlight()
+    end
+end)
+
+game.Players.LocalPlayer.Chatted:Connect(function(cmdchat)
+    if cmdchat == "/e rj" then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+    end
+
+    if cmdchat == "/e sh" then
+        loadstring(game:HttpGet"https://raw.githubusercontent.com/H4KKDOG/MiscScripts/main/ServerHop.lua")()
     end
 end)
 
@@ -265,5 +278,17 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "Sheriff Shoot",
 	Text = "Keybind: C",
+    Duration = 5
+})
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "CMD",
+	Text = "(  /e rj  ) to Rejoin",
+    Duration = 5
+})
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "CMD",
+	Text = "(  /e sh  ) to ServerHop",
     Duration = 5
 })
