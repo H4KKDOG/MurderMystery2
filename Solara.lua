@@ -18,13 +18,6 @@ end)
 
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Gameplay").Fade.OnClientEvent:Connect(function()
     task.wait(10)
-    tool = Instance.new("Tool")
-    tool.RequiresHandle = false
-    tool.Name = "Shoot"
-    tool.Activated:connect(function()
-        shootMurder()
-    end)
-    tool.Parent = game.Players.LocalPlayer.Backpack
     game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 17
 end)
  
@@ -61,7 +54,6 @@ function UpdateHighlights()
 				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 0.5
 			elseif not IsAlive(v) then
-				Highlight.FillColor = Color3.fromRGB(100, 100, 100)
 				Highlight.OutlineTransparency = 1
                 Highlight.FillTransparency = 1
 			else
@@ -203,6 +195,18 @@ function shootMurder()
     game:GetService("Players").LocalPlayer.Character.Gun.KnifeLocal.CreateBeam.RemoteFunction:InvokeServer(unpack(args))
 end
 
+function GunHighlight()
+    for i, v in pairs(wworkspace:GetDescendants()) do
+        if v.Name == "GunDrop" then 
+            local espgun = Instance.new("Highlight", v)
+            espgun.Name = "ESP_Highlight"
+            espgun.FillColor = Color3.fromRGB(255, 255, 0)
+            espgun.OutlineTransparency = 1
+            espgun.FillTransparency = 0.5   
+        end
+    end
+end
+
 task.spawn(function()
 	while task.wait() do
         roles = game:GetService("ReplicatedStorage"):FindFirstChild("GetPlayerData", true):InvokeServer()
@@ -227,12 +231,7 @@ workspace.DescendantAdded:Connect(function(GunESP)
         	Text = "Gun Dropped",
            Duration = 3
         })
-        local espgunhigh = Instance.new("Highlight")
-        espgunhigh.Name = "EspGun"
-	espgunhigh.Adornee = GunESP
-        espgunhigh.FillColor = Color3.fromRGB(255, 255, 0)
-        espgunhigh.FillTransparency = 0.5
-	espgunhigh.OutlineTransparency = 1
+        GunHighlight()
     end
 end)
 
