@@ -196,13 +196,12 @@ function shootMurder()
 end
 
 function GunHighlight()
-    local children = workspace:GetChildren()
-        
-    for i = 1, #children do
-        local v = children[i]
-        if v.Name == "GunDrop" then 
+    for i, v in pairs(workspace:GetChildren()) do
+        if v.Name == "GunDrop" then
             local espgun = Instance.new("Highlight", v)
             espgun.Name = "GunHighlight"
+            espgun.Adornee = v
+            espgun.Parent = v
             espgun.FillColor = Color3.fromRGB(255, 255, 0)
             espgun.OutlineTransparency = 1
             espgun.FillTransparency = 0.5
@@ -244,7 +243,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(cmdchat)
     end
 
     if cmdchat == "/e sh" then
-        loadstring(game:HttpGet"https://raw.githubusercontent.com/H4KKDOG/MiscScripts/main/ServerHop.lua")()
+        local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/H4KKDOG/MiscScripts/main/ServerHop.lua")()
+        module:Teleport(game.PlaceId)
     end
 end)
 
@@ -284,11 +284,11 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "CMD",
 	Text = "(  /e rj  ) to Rejoin",
-    Duration = 5
+    Duration = 10
 })
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "CMD",
 	Text = "(  /e sh  ) to ServerHop",
-    Duration = 5
+    Duration = 10
 })
